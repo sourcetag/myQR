@@ -4,10 +4,12 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const morgan = require('morgan')
+const morgan = require('morgan');
+const multer = require('multer');
 const flash = require('connect-flash');
 const passport = require('passport')
 const LocalStrategy = require('passport-local');
+const qr = require('qr-image');
 const {DATABASE_URL, PORT, SECRET} = require('./config');
 const User = require('./models/user');
 const usersRouter = require('./routes/usersRouter');
@@ -47,7 +49,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('*', (req, res) => {
-  return res.status(404).json({ message: 'Not Found'});
+  res.status(404);
+  res.render('404');
 });
 let server;
 

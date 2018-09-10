@@ -1,0 +1,10 @@
+<% include ./partials/header %>
+
+<h1>Upload QR Code</h1>
+<form action="/codes/upload" method="POST" enctype="multipart/form-data">
+  <label>Select file to upload</label>
+  <input type="file" name="upload" accept="image/*">
+  <button type="submit">Upload</button>
+</form>
+
+<% include ./partials/footer %>

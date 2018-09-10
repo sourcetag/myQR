@@ -1,7 +1,17 @@
 <% include ./partials/header %>
-<% include ./partials/navigation %>
 
 <h1>codes</h1>
-<a href="users/logout">logout</a>
+<a href="/codes/new">New Code</a>
+<a href="/codes/upload">Upload Code</a>
+
+<div>
+  <% if(codes) { %>
+    <% codes.forEach(code => { %>
+      <%- code.svg %>
+      <p><%= code.title %></p>
+      <p><%= code.text %></p>
+    <% }); %>
+  <% } %>
+</div>
 
 <% include ./partials/footer %>

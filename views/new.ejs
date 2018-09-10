@@ -1,0 +1,14 @@
+<% include ./partials/header %>
+
+<div class="code-form">
+  <h1>New Code</h1>
+  <form action="/codes" method="POST">
+    <label>Code Title</label>
+    <input type="text" name="title" placeholder="title">
+    <label>Code Text</label>
+    <input type="text" name="text" placeholder="text">
+    <button type="submit">Create</button>
+  </form>
+</div>
+
+<% include ./partials/footer %>
