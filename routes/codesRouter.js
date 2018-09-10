@@ -59,9 +59,20 @@ router.get('/', isLoggedIn, (req, res) => {
     })
     .catch(err => {
       req.flash('error', 'Internal Server Error');
-      res.status(500);
+      res.redirect(500, '/codes');
     })
 });
+
+router.get('/:id', isLoggedIn, (req, res) => {
+  Code.findById(req.params.id)
+    .then(code => {
+      res.render('codePage', {code: code});
+    })
+    .catch(err => {
+      req.flash('error', 'Internal Server Error');
+      res.redirect(500, '/codes');
+    })
+})
 
 router.get('/new', isLoggedIn, (req, res) => {
   res.render('new');
@@ -72,7 +83,7 @@ router.get('/upload', isLoggedIn, (req, res) => {
 });
 
 router.post('/', isLoggedIn, (req, res) => {
-  const svgStr = qr.imageSync(`${req.body.text}`, { type: 'svg', size: 5 });
+  const svgStr = qr.imageSync(`${req.body.text}`, { type: 'svg', size: 8 });
 
   const newCode = {
     title: req.body.title,
@@ -97,7 +108,7 @@ router.post('/upload', (req, res) => {
   upload(req, res, (err) => {
     if(err){
       req.flash('error', `${err}`);
-      res.redirect('/upload');
+      res.redirect('/codes/upload');
     } else {
       console.log('Got File:',req.file.filename);
       const imgData = processImgData(req.file);

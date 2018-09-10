@@ -4,12 +4,14 @@
 <a href="/codes/new">New Code</a>
 <a href="/codes/upload">Upload Code</a>
 
-<div>
+<div class="code-grid">
   <% if(codes) { %>
     <% codes.forEach(code => { %>
-      <%- code.svg %>
-      <p><%= code.title %></p>
-      <p><%= code.text %></p>
+      <div class="code-thumbnail">
+        <%- code.svg %>
+        <p><%= code.title %></p>
+        <a href="/codes/<%= code._id %>">View Code</a>
+      </div>
     <% }); %>
   <% } %>
 </div>

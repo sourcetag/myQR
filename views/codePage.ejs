@@ -1,0 +1,11 @@
+<% include ./partials/header %>
+
+<a href="/codes">Back to codes</a>
+<h1><%= code.title %></h1>
+
+<div class="code-page">
+  <%- code.svg %>
+  <p><%= code.text %></p>
+</div>
+
+<% include ./partials/footer %>

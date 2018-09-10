@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  padding: 0;
+  padding: 0px;
   font-family: 'Roboto Condensed', sans-serif;
 }
 
@@ -29,4 +29,17 @@ body {
 .signed-in-user {
   text-decoration: none;
   color: black;
+}
+
+.code-thumbnail {
+  border: 2px solid black;
+  text-align: center;
+  padding: 0;
+}
+
+.code-grid {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1em;
 }
