@@ -9,7 +9,7 @@ const jpeg = require('jpeg-js');
 const png = require('pngparse-sync');
 const jsQR = require('jsqr');
 const router = express.Router();
-const {isLoggedIn, validateCode} = require('../middleware');
+const {isLoggedIn, validateCode, isOwner} = require('../middleware');
 const Code = require('../models/code');
 mongoose.Promise = global.Promise;
 
@@ -59,20 +59,9 @@ router.get('/', isLoggedIn, (req, res) => {
     })
     .catch(err => {
       req.flash('error', 'Internal Server Error');
-      res.redirect(500, '/codes');
+      res.redirect('/codes');
     })
 });
-
-router.get('/:id', isLoggedIn, (req, res) => {
-  Code.findById(req.params.id)
-    .then(code => {
-      res.render('codePage', {code: code});
-    })
-    .catch(err => {
-      req.flash('error', 'Internal Server Error');
-      res.redirect(500, '/codes');
-    })
-})
 
 router.get('/new', isLoggedIn, (req, res) => {
   res.render('new');
@@ -82,13 +71,35 @@ router.get('/upload', isLoggedIn, (req, res) => {
   res.render('upload');
 });
 
-router.post('/', isLoggedIn, (req, res) => {
-  const svgStr = qr.imageSync(`${req.body.text}`, { type: 'svg', size: 8 });
+router.get('/:id', isLoggedIn, (req, res) => {
+  Code.findById(req.params.id)
+    .then(code => {
+      res.render('codePage', {code: code});
+    })
+    .catch(err => {
+      req.flash('error', 'Internal Server Error');
+      res.redirect('/codes');
+    })
+})
+
+router.get('/:id/edit', isLoggedIn, (req, res) => {
+  Code.findById(req.params.id)
+    .then(code => {
+      res.render('edit', {code: code});
+    })
+    .catch(err => {
+      req.flash('error', 'Internal Server Error');
+      res.redirect('/codes');
+    })
+});
+
+router.post('/', validateCode, (req, res) => {
+  const pngStr = qr.imageSync(`${req.body.text}`, { type: 'png', size: 8 }).toString('base64');
 
   const newCode = {
     title: req.body.title,
     text: req.body.text,
-    svg: svgStr,
+    png: pngStr,
     favorite: req.body.fav || false,
     created: Date.now(),
     author: req.user._id
@@ -104,24 +115,57 @@ router.post('/', isLoggedIn, (req, res) => {
     })
 });
 
-router.post('/upload', (req, res) => {
+router.post('/upload', isLoggedIn, (req, res) => {
   upload(req, res, (err) => {
     if(err){
       req.flash('error', `${err}`);
       res.redirect('/codes/upload');
     } else {
-      console.log('Got File:',req.file.filename);
-      const imgData = processImgData(req.file);
-      const code = jsQR(imgData.data, imgData.width, imgData.height);
-      fs.unlinkSync(`./public/uploads/${req.file.filename}`);
-      if(code){
-        res.render('newFromUpload', {text: code.data, msg: 'Succesfully read code'});
+      if (req.file){
+        const imgData = processImgData(req.file);
+        const code = jsQR(imgData.data, imgData.width, imgData.height);
+        fs.unlinkSync(`./public/uploads/${req.file.filename}`);
+        if(code){
+          res.render('newFromUpload', {text: code.data, msg: 'Succesfully read code'});
+        } else {
+          req.flash('error', 'Unable to read data from image');
+          res.redirect('/codes/upload');
+        }
       } else {
-        req.flash('error', 'Unable to read data from image');
+        req.flash('error', 'Unable to upload file');
         res.redirect('/codes/upload');
       }
     }
   })
+});
+
+router.put('/:id', isOwner, (req, res) => {
+  if(req.body.title){
+    Code.findByIdAndUpdate(req.params.id, {$set: {title: req.body.title}})
+    .then(code => {
+      req.flash('success', `Succesfully updated ${code.title}`);
+      res.redirect(`/codes/${req.params.id}`);
+    })
+    .catch(err => {
+      req.flash('error', 'Internal Server Error');
+      res.redirect(`/codes/${req.params.id}/edit`);
+    });
+  } else {
+    req.flash('error', 'Field left blank')
+    res.redirect(`/codes/${req.params.id}/edit`);
+  }
+});
+
+router.delete('/:id', isOwner, (req, res) => {
+  Code.findByIdAndRemove(req.params.id)
+    .then(code => {
+      req.flash('success', 'Code was succesfully deleted');
+      res.redirect('/codes');
+    })
+    .catch(err => {
+      req.flash('error', 'Internal Server Error');
+      res.redirect('/codes');
+    })
 });
 
 module.exports = router;

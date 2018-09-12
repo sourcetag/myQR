@@ -8,7 +8,7 @@
   <% if(codes) { %>
     <% codes.forEach(code => { %>
       <div class="code-thumbnail">
-        <%- code.svg %>
+        <img src="data:image/png;base64, <%= code.png %>">
         <p><%= code.title %></p>
         <a href="/codes/<%= code._id %>">View Code</a>
       </div>

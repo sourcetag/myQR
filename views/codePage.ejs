@@ -4,8 +4,17 @@
 <h1><%= code.title %></h1>
 
 <div class="code-page">
-  <%- code.svg %>
+  <img src="data:image/png;base64, <%= code.png %>">
   <p><%= code.text %></p>
+  <a href="/codes/<%= code._id %>/edit">Edit Code</a>
+  <button class="download">Download Code</button>
 </div>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script src="/src/imgDownload.js"></script>
 
 <% include ./partials/footer %>

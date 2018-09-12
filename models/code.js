@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const codeSchema = new mongoose.Schema({
   title: String,
   text: String,
-  svg: String,
+  png: String,
   favorite: Boolean,
   created: Date,
   author: {

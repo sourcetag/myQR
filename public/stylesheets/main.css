@@ -37,6 +37,10 @@ body {
   padding: 0;
 }
 
+.code-thumbnail img {
+  width: 200px;
+}
+
 .code-grid {
   padding: 10px;
   display: grid;

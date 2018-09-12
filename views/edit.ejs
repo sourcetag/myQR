@@ -1,0 +1,18 @@
+<% include ./partials/header %>
+
+<div class="code-edit-form">
+  <h1>Edit Code</h1>
+  <form action="/codes/<%= code._id %>?_method=PUT" method="POST">
+    <label>Code Title</label>
+    <input type="text" name="title" placeholder="title" value="<%= code.title %>">
+    <button type="submit">Submit Changes</button>
+  </form>
+</div>
+
+<div class="code-delete-form">
+  <form action="/codes/<%= code._id %>?_method=DELETE" method="POST">
+    <button type="submit">Delete Code</button>
+  </form>
+</div>
+
+<% include ./partials/footer %>
