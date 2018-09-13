@@ -1,16 +1,29 @@
 <% include ./partials/header %>
 
-<h1>codes</h1>
-<a href="/codes/new">New Code</a>
-<a href="/codes/upload">Upload Code</a>
+<div class="well">
+  <div class="container">
+    <h1><i class="fas fa-qrcode"></i> My Codes</h1>
+    <form class="code-search-form">
+      <input type='text' name='search' placeholder="Search my codes">
+      <button type="submit"><i class="fas fa-search"></i></button>
+    </form>
+    <hr>
+    <a href="/codes/new"><i class="fas fa-plus"></i> New Code</a>
+    <a href="/codes/upload"><i class="fas fa-upload"></i> Upload Code</a>
+  </div>
+</div>
 
 <div class="code-grid">
   <% if(codes) { %>
     <% codes.forEach(code => { %>
       <div class="code-thumbnail">
-        <img src="data:image/png;base64, <%= code.png %>">
-        <p><%= code.title %></p>
-        <a href="/codes/<%= code._id %>">View Code</a>
+        <img src="data:image/png;base64, <%= code.png %>" alt="qr-code">
+        <div class="code-thumbnail-caption">
+          <p><%= code.title %></p>
+        </div>
+        <p>
+          <a class="view-code" href="/codes/<%= code._id %>">View Code</a>
+        </p>
       </div>
     <% }); %>
   <% } %>

@@ -1,13 +1,19 @@
 <% include ./partials/header %>
 
-<div class="code-form">
+<div class="new-form">
   <h1>New Code</h1>
   <form action="/codes" method="POST">
-    <label>Code Title</label>
-    <input type="text" name="title" placeholder="title">
-    <label>Code Text</label>
-    <textarea name="text" placeholder="Code Text"></textarea>
-    <button type="submit">Create</button>
+    <div class="form-group">
+      <label>Code Title</label>
+      <input type="text" name="title" placeholder="Code Title">
+    </div>
+    <div class="form-group">
+      <label>Code Text</label>
+      <textarea name="text" placeholder="Encoded Text"></textarea>
+    </div>
+    <div class="new-form-button">
+      <button type="submit">Create</button>
+    </div>
   </form>
 </div>
 

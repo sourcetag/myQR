@@ -1,13 +1,16 @@
 <nav class="navbar">
-  <ul class="navlinks">
-    <% if(!currentUser){ %>
-      <li><a href="/">Home</a></li>
-      <li><a href="/users/login">Login</a></li>
-      <li><a href="/users/register">SignUp</a></li>
-    <% } else { %>
-      <li><a class="signed-in-user" href="#">Signed In As <%= currentUser.username %></a></li>
-      <li><a href="/codes">Codes</a></li>
-      <li><a href="/users/logout">Logout</a></li>
-    <% } %>
-  </ul>
+  <div class="nav-title"><p>myQR</p></div>
+  <div class=nav-items>
+    <ul class="navlinks">
+      <% if(!currentUser){ %>
+        <li><a href="/">Home</a></li>
+        <li><a href="/users/login">Login</a></li>
+        <li><a href="/users/register">SignUp</a></li>
+      <% } else { %>
+        <li><span class="signed-in-user">Signed in as: <strong><%= currentUser.username %></strong></span></li>
+        <li><a href="/codes">Codes</a></li>
+        <li><a href="/users/logout">Logout</a></li>
+      <% } %>
+    </ul>
+</div>
 </nav>

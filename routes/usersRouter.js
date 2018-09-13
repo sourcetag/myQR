@@ -17,14 +17,12 @@ router.post('/register', (req, res) => {
   User.register(newUser, req.body.password)
     .then(user => {
       passport.authenticate("local")(req, res, function(){
-        req.flash('success', 'Welcome to myQR' + user.username);
-        console.log(user);
+        req.flash('success', `Welcome to myQR: ${user.username}!`);
         res.redirect("/codes");
       });
     })
     .catch(err => {
       req.flash("error", err.message);
-      console.log('error', err);
       return res.redirect('/users/register');
     });
 });

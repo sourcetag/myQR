@@ -1,13 +1,20 @@
 <% include ./partials/header %>
 
-<a href="/codes">Back to codes</a>
-<h1><%= code.title %></h1>
-
 <div class="code-page">
-  <img src="data:image/png;base64, <%= code.png %>">
-  <p><%= code.text %></p>
-  <a href="/codes/<%= code._id %>/edit">Edit Code</a>
-  <button class="download">Download Code</button>
+  <div class="code-options">
+    <p>Code Options</p>
+    <ul class="code-options-list">
+    <li><a href="/codes">Back to codes</a></li>
+    <li><a href="/codes/<%= code._id %>/edit">Edit Code</a></li>
+    <li><a href="data:image/png;base64, <%= code.png %>" download="<%= code.title %>.png">Download Code</a></li>
+    </ul>
+  </div>
+
+  <div class="code-container">
+    <h1 class="code-title"><%= code.title %></h1>
+    <img src="data:image/png;base64, <%= code.png %>">
+    <p class="code-data"><%= code.text %></p>
+  </div>
 </div>
 
 <script
@@ -15,6 +22,6 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
 
-<script src="/src/imgDownload.js"></script>
+<script src="/src/index.js"></script>
 
 <% include ./partials/footer %>
