@@ -63,6 +63,10 @@ body {
   margin-right: 20px;
 }
 
+.nav-items-resp {
+  display: none;
+}
+
 /* ----------Codes Page Styling---------- */
 .well {
   margin-top: 0;
@@ -184,6 +188,28 @@ body {
 
 .view-code a:visited {
   color: #fff;
+}
+
+.codes-options-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.code-sort p {
+  display: inline;
+  margin-right: 10px;
+}
+
+.code-sort {
+  text-align: right;
+}
+
+.code-sort a {
+  cursor: pointer;
+}
+
+.sort-select {
+  text-decoration: underline !important;
 }
 
 /* ----------Message Styling---------- */
@@ -360,11 +386,24 @@ body {
   text-align: center;
 }
 
+.back-to-codes {
+  text-align: center;
+}
+
+.back-to-codes a {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+.back-to-codes a:visited {
+  color: #337ab7;
+}
+
 /* ----------Code Page Styling----------*/  
 
 .code-page {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 3fr 1fr;
   grid-gap: 3em;
   padding-left: 60px;
   padding-right: 60px;
@@ -373,7 +412,7 @@ body {
 .code-options {
   display:grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 50px 50px 50px 50px 50px;
+  grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px;
   border: none;
   border-radius: 2px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .16), 0 0 0 1px rgba(0, 0, 0, .08);
@@ -428,6 +467,39 @@ body {
 
 .code-download {
   background-color: #007bff;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  color: #fff;
+  border-radius: .25rem;
+  width: 70%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.code-share-page {
+  background-color: #6c757d;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  color: #fff;
+  border-radius: .25rem;
+  width: 70%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.code-email {
+  background-color: #17a2b8;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  color: #fff;
+  border-radius: .25rem;
+  width: 70%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.code-tweet {
+  background-color: #1b95e0;
   padding: .375rem .75rem;
   font-size: 1rem;
   color: #fff;
@@ -531,8 +603,8 @@ body {
   left: 0;
   z-index: -1;
   background: linear-gradient(
-      rgba(0, 0, 0, 0.7),
-      rgba(0, 0, 0, 0.7)
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.8)
     ),url("https://www.jacoballred.com/wp-content/uploads/2014/12/example.png") no-repeat center center fixed; 
   background-size: cover;
   color: #fff;
@@ -559,6 +631,7 @@ body {
   padding: 10px;
   font-size: 1.25em;
   border-radius: 4px;
+  color: #fff;
 }
 
 .landing a:visited {

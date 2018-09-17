@@ -1,6 +1,19 @@
 <% include ./partials/header %>
 
 <div class="code-page">
+
+  <div class="code-container">
+      <h1 class="code-title"><%= code.title %></h1>
+      <img src="data:image/png;base64, <%= code.png %>">
+      <p class="code-data-text"><strong>Code Data:</strong> <span class="code-data"><%= code.text %></span></p>
+      <p class="code-link"></p>
+      <div class="code-container-caption">
+        <p class="code-description-title"><strong>Code Description</strong></p>
+        <p class="code-description"><%= code.description %></p>
+        <p class="code-created-text"><strong>Created:</strong> <span class="code-created"><%= code.created %></span></p>
+      </div>
+  </div>
+
   <div class="code-options">
     <p>Code Options</p>
     <div class="option"></li><a class="codes-back" href="/codes"><i class="fas fa-caret-left"></i> Back to Codes</a></div>
@@ -11,22 +24,13 @@
     </div>
     <div class="option"><a class="code-edit" href="/codes/<%= code._id %>/edit"><i class="fas fa-edit"></i> Edit Code</a></div>
     <div class="option"><a class="code-download" href="data:image/png;base64, <%= code.png %>" download="<%= code.title %>.png"><i class="fas fa-file-download"></i> Download Code</a></div>
+    <div class="option"><a class="code-share-page" href="/codes/<%= code._id %>/share" target="_blank"><i class="fas fa-share"></i> Shareable Link</a></div>
+    <div class="option"><a class="code-email" href="mailto:?body=Check out my code: https://myqr.herokuapp.com/codes/<%= code._id %>/share&subject=Check out my code!"><i class="fas fa-envelope"></i> Email Code</a></div>
+    <div class="option"><a class="code-tweet" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fmyqr.herokuapp.com%2Fcodes%2F<%= code._id %>%2Fshare&text=Check%20out%20my%20code" target="_blank"><i class="fab fa-twitter"></i> Tweet Code</a></div>
     <div class="code-delete-form">
         <form action="/codes/<%= code._id %>?_method=DELETE" method="POST">
           <button class="code-delete" type="submit"><i class="fas fa-trash"></i> Delete Code</button>
         </form>
-    </div>
-  </div>
-
-  <div class="code-container">
-    <h1 class="code-title"><%= code.title %></h1>
-    <img src="data:image/png;base64, <%= code.png %>">
-    <p class="code-data-text"><strong>Code Data:</strong> <span class="code-data"><%= code.text %></span></p>
-    <p class="code-link"></p>
-    <div class="code-container-caption">
-      <p class="code-description-title"><strong>Code Description</strong></p>
-      <p class="code-description"><%= code.description %></p>
-      <p class="code-created-text"><strong>Created:</strong> <span class="code-created"><%= code.created %></span></p>
     </div>
   </div>
 </div>
@@ -36,6 +40,6 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
 
-<script src="/src/index.js"></script>
+<script src="/src/codePage.js"></script>
 
 <% include ./partials/footer %>

@@ -12,5 +12,20 @@
         <li><a href="/users/logout">Logout</a></li>
       <% } %>
     </ul>
-</div>
+  </div>
+  <div class="nav-items-resp">
+      <input class="menu-button" type="checkbox" id="menu-button" />
+      <label class="menu-icon" for="menu-button"><span class="navicon"></span></label>
+      <ul class="menu">
+          <% if(!currentUser){ %>
+            <li><a href="/">Home</a></li>
+            <li><a href="/users/login">Login</a></li>
+            <li><a href="/users/register">SignUp</a></li>
+          <% } else { %>
+            <li><span class="signed-in-user">Signed in as: <strong><%= currentUser.username %></strong></span></li>
+            <li><a href="/codes">Codes</a></li>
+            <li><a href="/users/logout">Logout</a></li>
+          <% } %>
+      </ul>
+  </div>
 </nav>

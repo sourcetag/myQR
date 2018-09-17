@@ -148,8 +148,7 @@ router.post('/upload', isLoggedIn, (req, res) => {
       if (req.file){
         const imgData = processImgData(req.file);
         const code = jsQR(imgData.data, imgData.width, imgData.height);
-        console.log(code);
-        //fs.unlinkSync(`./public/uploads/${req.file.filename}`);
+        fs.unlinkSync(`./public/uploads/${req.file.filename}`);
         if(code){
           res.render('newFromUpload', {text: code.data, msg: 'Succesfully read code'});
         } else {

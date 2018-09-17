@@ -2,11 +2,11 @@ language: node_js
 node_js: node
 services:
 - mongodb
-deploy:app: obscure-mesa-16828
+deploy:app: myqr
 deploy:
   provider: heroku
   api_key:
     secure: Nl0ZJ7mCzCS6SS1nhuUa/T+7f0Np7pxaoJJP/ckwKbUUPchRu7mtArr0SY7uPQrkUFFPFW7jxzSCvjpap38C15YPoPK8j2TnmSsBxvlCizpKP3x0GnU0h/FxVKgdhHRf6GUNFMpi3zVd7DOPOg2Y4nCTSbKXGgJPnLUJ38Ff7SoXAb1k2j+JDBMRiBfmC/GjCTTvZoO3VExFfnTuG/jAO4qSD7HNe1km0G78jJfqVeaqMiWxT/4qpEbA6hrD6X+Kqy/rvihO88aUSy+Vw3EBEMW+SCDWpMzrCsrAmuVZ1n/DhsbvrI+WPCU6FhvrCIlicazSeUlYtV9EO0/e4wQx2qC7+Ox78l5laMEO7kTdUGMcipZuyxfCdcMsbYp7JTobMA3Rzdj18xe7oMvyrb9A1zsGfC1m8eRAA/i1PQ+PiDzxNGSVOyN/0SMYLSJlmDK2KLR1zqELflQJYZrtPXcqYqUAXmB51QXWwQQxJUUJHk1tG+lxXmuVfJePWswKJlAwY3otTpGPLZkf3LMLqCYxFU+j7xc9D4AxuSzA4YEA7Cxl/uAk8OlFx3tCVcChzhvZw/QFDVqhlQuVk57H76mDN42y0D8mMgP7Iv8ILRSfjEj1mEMPpoEdj3/faG7J3uj/aTc4anPlksaUxRJxpVApEydz901SVGkYcvBPpg5DpQA=
-  app: obscure-mesa-16828
+  app: myqr
   on:
     repo: drewlara/myQR

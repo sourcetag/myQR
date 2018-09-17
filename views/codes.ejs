@@ -8,15 +8,24 @@
       <button type="submit"><i class="fas fa-search"></i></button>
     </form>
     <hr>
-    <a href="/codes/new"><i class="fas fa-plus"></i> New Code</a>
-    <a href="/codes/upload"><i class="fas fa-upload"></i> Upload Code</a>
+    <div class="codes-options-container">
+      <div class="new-code-options">
+        <a href="/codes/new"><i class="fas fa-plus"></i> New Code</a>
+        <a href="/codes/upload"><i class="fas fa-upload"></i> Upload Code</a>
+      </div>
+      <div class="code-sort">
+        <p>Sort by:</p>
+        <a class="sort-all">All</a>
+        <a class="sort-fav">Favorites</a>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="code-grid">
   <% if(codes) { %>
     <% codes.forEach(code => { %>
-      <div class="code-thumbnail">
+      <div class="code-thumbnail" data-fav="<%= code.favorite %>">
         <img src="data:image/png;base64, <%= code.png %>" alt="qr-code">
         <div class="code-thumbnail-caption">
           <p><%= code.title %></p>
@@ -28,5 +37,12 @@
     <% }); %>
   <% } %>
 </div>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script src="/src/codes.js"></script>
 
 <% include ./partials/footer %>
