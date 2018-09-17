@@ -40,6 +40,7 @@ function checkFileType(file, cb){
 }
 
 function processImgData(file){
+  console.log('FILE::::::::::::::', file);
   const ext = path.extname(file.originalname).toLowerCase();
   if (ext === '.jpg' || ext === '.jpeg') {
     const jpegData = fs.readFileSync(`./public/uploads/${file.filename}`);
@@ -147,6 +148,7 @@ router.post('/upload', isLoggedIn, (req, res) => {
     } else {
       if (req.file){
         const imgData = processImgData(req.file);
+        console.log('IMAGE DATA:::::::', imgData.data, imgData.width, imgData.height);
         const code = jsQR(imgData.data, imgData.width, imgData.height);
         fs.unlinkSync(`./public/uploads/${req.file.filename}`);
         if(code){
