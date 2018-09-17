@@ -1,0 +1,23 @@
+<% include ./partials/header %>
+
+<div class="share-grid">
+  <div class="code-share-container">
+      <h1 class="code-title"><%= code.title %></h1>
+      <img src="data:image/png;base64, <%= code.png %>">
+      <p class="code-data-text"><strong>Code Data:</strong> <span class="code-data"><%= code.text %></span></p>
+      <p class="code-link"></p>
+      <div class="code-share-container-caption">
+        <p class="code-description-title"><strong>Code Description</strong></p>
+        <p class="code-description"><%= code.description %></p>
+      </div>
+    </div>
+</div>
+  
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  
+  <script src="/src/index.js"></script>
+  
+  <% include ./partials/footer %>

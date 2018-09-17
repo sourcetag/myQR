@@ -3,15 +3,17 @@
 <div class="code-edit-form">
   <h1>Edit Code</h1>
   <form action="/codes/<%= code._id %>?_method=PUT" method="POST">
-    <label>Code Title</label>
-    <input type="text" name="title" placeholder="title" value="<%= code.title %>">
-    <button type="submit">Submit Changes</button>
-  </form>
-</div>
-
-<div class="code-delete-form">
-  <form action="/codes/<%= code._id %>?_method=DELETE" method="POST">
-    <button type="submit">Delete Code</button>
+    <div class="form-group">
+      <label>Code Title</label>
+      <input type="text" name="title" placeholder="title" value="<%= code.title %>">
+    </div>
+    <div class="form-group">
+        <label>Code Description</label>
+        <textarea name="description" placeholder="Code Description"><%= code.description %></textarea>
+    </div>
+    <div class="edit-form-button">
+      <button type="submit">Submit Changes</button>
+    </div>
   </form>
 </div>
 

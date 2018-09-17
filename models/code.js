@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const codeSchema = new mongoose.Schema({
   title: String,
   text: String,
+  description: String,
   png: String,
   favorite: Boolean,
   created: Date,

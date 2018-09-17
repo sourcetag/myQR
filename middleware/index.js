@@ -13,11 +13,11 @@ const isLoggedIn = function(req,res,next){
 
 const validateCode = function(req,res,next){
   if (req.isAuthenticated()){
-    if (!('title' in req.body) || !('text' in req.body)) {
+    if (!('title' in req.body) || !('text' in req.body) || !('description' in req.body)) {
       req.flash("error", "Missing field");
       res.redirect("/codes/new");
     } else {
-      if (req.body.title.length <= 1 || req.body.text.length <= 1) {
+      if (req.body.title.length <= 1 || req.body.text.length <= 1 || req.body.description.length <= 1) {
         req.flash("error", "Field too short");
         res.redirect("/codes/new");
       } else {

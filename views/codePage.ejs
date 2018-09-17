@@ -3,17 +3,31 @@
 <div class="code-page">
   <div class="code-options">
     <p>Code Options</p>
-    <ul class="code-options-list">
-    <li><a href="/codes">Back to codes</a></li>
-    <li><a href="/codes/<%= code._id %>/edit">Edit Code</a></li>
-    <li><a href="data:image/png;base64, <%= code.png %>" download="<%= code.title %>.png">Download Code</a></li>
-    </ul>
+    <div class="option"></li><a class="codes-back" href="/codes"><i class="fas fa-caret-left"></i> Back to Codes</a></div>
+    <div class="code-favorite-form">
+      <form action="/codes/<%= code._id %>/favorite?_method=PUT" method="POST">
+        <button class="code-favorite" type="submit" data-fav="<%= code.favorite %>"><i class="far fa-star"></i> Favorite Code</button>
+      </form>
+    </div>
+    <div class="option"><a class="code-edit" href="/codes/<%= code._id %>/edit"><i class="fas fa-edit"></i> Edit Code</a></div>
+    <div class="option"><a class="code-download" href="data:image/png;base64, <%= code.png %>" download="<%= code.title %>.png"><i class="fas fa-file-download"></i> Download Code</a></div>
+    <div class="code-delete-form">
+        <form action="/codes/<%= code._id %>?_method=DELETE" method="POST">
+          <button class="code-delete" type="submit"><i class="fas fa-trash"></i> Delete Code</button>
+        </form>
+    </div>
   </div>
 
   <div class="code-container">
     <h1 class="code-title"><%= code.title %></h1>
     <img src="data:image/png;base64, <%= code.png %>">
-    <p class="code-data"><%= code.text %></p>
+    <p class="code-data-text"><strong>Code Data:</strong> <span class="code-data"><%= code.text %></span></p>
+    <p class="code-link"></p>
+    <div class="code-container-caption">
+      <p class="code-description-title"><strong>Code Description</strong></p>
+      <p class="code-description"><%= code.description %></p>
+      <p class="code-created-text"><strong>Created:</strong> <span class="code-created"><%= code.created %></span></p>
+    </div>
   </div>
 </div>
 

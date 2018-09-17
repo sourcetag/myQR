@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage: storage,
-  limits: {filesize: 500000},
+  limits: {filesize: 5000000},
   fileFilter: function(req, file, cb){
     checkFileType(file, cb);
   }
@@ -63,6 +63,18 @@ router.get('/', isLoggedIn, (req, res) => {
     })
 });
 
+router.get('/search', isLoggedIn, (req, res) => {
+  const searchTerm = req.query.search;
+  Code.find({title: {$regex: searchTerm, $options: 'i'}, author: req.user._id})
+    .then(codes => {
+      res.render('codes', {codes: codes});
+    })
+    .catch(err => {
+      req.flash('error', 'Internal Server Error');
+      res.redirect('/codes');
+    })
+});
+
 router.get('/new', isLoggedIn, (req, res) => {
   res.render('new');
 });
@@ -93,14 +105,26 @@ router.get('/:id/edit', isLoggedIn, (req, res) => {
     })
 });
 
+router.get('/:id/share', (req, res) => {
+  Code.findById(req.params.id)
+    .then(code => {
+      res.render('share', {code: code});
+    })
+    .catch(err => {
+      req.flash('error', 'Internal Server Error');
+      res.redirect('/codes');
+    });
+})
+
 router.post('/', validateCode, (req, res) => {
   const pngStr = qr.imageSync(`${req.body.text}`, { type: 'png', size: 8 }).toString('base64');
 
   const newCode = {
     title: req.body.title,
     text: req.body.text,
+    description: req.body.description,
     png: pngStr,
-    favorite: req.body.fav || false,
+    favorite: false,
     created: Date.now(),
     author: req.user._id
   }
@@ -124,7 +148,8 @@ router.post('/upload', isLoggedIn, (req, res) => {
       if (req.file){
         const imgData = processImgData(req.file);
         const code = jsQR(imgData.data, imgData.width, imgData.height);
-        fs.unlinkSync(`./public/uploads/${req.file.filename}`);
+        console.log(code);
+        //fs.unlinkSync(`./public/uploads/${req.file.filename}`);
         if(code){
           res.render('newFromUpload', {text: code.data, msg: 'Succesfully read code'});
         } else {
@@ -140,10 +165,10 @@ router.post('/upload', isLoggedIn, (req, res) => {
 });
 
 router.put('/:id', isOwner, (req, res) => {
-  if(req.body.title){
-    Code.findByIdAndUpdate(req.params.id, {$set: {title: req.body.title}})
+  if(req.body.title && req.body.description){
+    Code.findByIdAndUpdate(req.params.id, {$set: {title: req.body.title, description: req.body.description}})
     .then(code => {
-      req.flash('success', `Succesfully updated ${code.title}`);
+      req.flash('success', `Succesfully updated code`);
       res.redirect(`/codes/${req.params.id}`);
     })
     .catch(err => {
@@ -155,6 +180,35 @@ router.put('/:id', isOwner, (req, res) => {
     res.redirect(`/codes/${req.params.id}/edit`);
   }
 });
+
+router.put('/:id/favorite', isOwner, (req, res) => {
+  Code.findById(req.params.id)
+    .then(code => {
+      if(code.favorite === false) {
+        Code.findByIdAndUpdate(code._id, {$set: {favorite: true}}, {new: true})
+          .then(code => {
+            res.render('codePage', {code: code});
+          })
+          .catch(err => {
+            req.flash('error', 'Internal Server Error');
+            res.redirect('/codes');
+          })
+      } else {
+        Code.findByIdAndUpdate(code._id, {$set: {favorite: false}}, {new: true})
+          .then(code => {
+            res.render('codePage', {code: code});
+          })
+          .catch(err => {
+            req.flash('error', 'Internal Server Error');
+            res.redirect('/codes');
+          })
+      }
+    })
+    .catch(err => {
+      req.flash('error', 'Internal Server Error');
+      res.redirect('/codes');
+    })
+})
 
 router.delete('/:id', isOwner, (req, res) => {
   Code.findByIdAndRemove(req.params.id)
