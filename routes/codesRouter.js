@@ -149,14 +149,28 @@ router.post('/upload', isLoggedIn, (req, res) => {
       if (req.file){
         const imgData = processImgData(req.file);
         console.log('IMAGE DATA:::::::', imgData.data, imgData.width, imgData.height);
-        const code = jsQR(imgData.data, imgData.width, imgData.height);
-        fs.unlinkSync(`./public/uploads/${req.file.filename}`);
-        if(code){
+        try {
+          const code = jsQR(imgData.data, imgData.width, imgData.height);
+          fs.unlinkSync(`./public/uploads/${req.file.filename}`);
+          if(code){
+            res.render('newFromUpload', {text: code.data, msg: 'Succesfully read code'});
+          } else {
+            req.flash('error', 'Unable to read data from image');
+            res.redirect('/codes/upload');
+          }
+        }
+        catch(err) {
+          req.flash('error', 'Unable to read data from image');
+          res.redirect('/codes/upload');
+        }
+        /*const code = jsQR(imgData.data, imgData.width, imgData.height);
+        fs.unlinkSync(`./public/uploads/${req.file.filename}`);*/
+        /*if(code){
           res.render('newFromUpload', {text: code.data, msg: 'Succesfully read code'});
         } else {
           req.flash('error', 'Unable to read data from image');
           res.redirect('/codes/upload');
-        }
+        }*/
       } else {
         req.flash('error', 'Unable to upload file');
         res.redirect('/codes/upload');
