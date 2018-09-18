@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage: storage,
-  limits: {filesize: 500000},
+  limits: {fileSize: 500000},
   fileFilter: function(req, file, cb){
     checkFileType(file, cb);
   }
@@ -40,7 +40,6 @@ function checkFileType(file, cb){
 }
 
 function processImgData(file){
-  console.log('FILE::::::::::::::', file);
   const ext = path.extname(file.originalname).toLowerCase();
   if (ext === '.jpg' || ext === '.jpeg') {
     const jpegData = fs.readFileSync(`./public/uploads/${file.filename}`);
@@ -148,7 +147,6 @@ router.post('/upload', isLoggedIn, (req, res) => {
     } else {
       if (req.file){
         const imgData = processImgData(req.file);
-        console.log('IMAGE DATA:::::::', imgData.data, imgData.width, imgData.height);
         try {
           const code = jsQR(imgData.data, imgData.width, imgData.height);
           fs.unlinkSync(`./public/uploads/${req.file.filename}`);
@@ -163,14 +161,6 @@ router.post('/upload', isLoggedIn, (req, res) => {
           req.flash('error', 'Unable to read data from image');
           res.redirect('/codes/upload');
         }
-        /*const code = jsQR(imgData.data, imgData.width, imgData.height);
-        fs.unlinkSync(`./public/uploads/${req.file.filename}`);*/
-        /*if(code){
-          res.render('newFromUpload', {text: code.data, msg: 'Succesfully read code'});
-        } else {
-          req.flash('error', 'Unable to read data from image');
-          res.redirect('/codes/upload');
-        }*/
       } else {
         req.flash('error', 'Unable to upload file');
         res.redirect('/codes/upload');
