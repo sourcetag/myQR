@@ -135,7 +135,7 @@ router.post('/', validateCode, (req, res) => {
     })
     .catch(err => {
       req.flash("error", "Internal Server Error");
-      res.redirect('/codes');
+      res.redirect('/codes/new');
     })
 });
 
@@ -151,7 +151,7 @@ router.post('/upload', isLoggedIn, (req, res) => {
           const code = jsQR(imgData.data, imgData.width, imgData.height);
           fs.unlinkSync(`./public/uploads/${req.file.filename}`);
           if(code){
-            res.render('newFromUpload', {text: code.data, msg: 'Succesfully read code'});
+            res.render('newFromUpload', {text: code.data, msg: 'Successfully read code'});
           } else {
             req.flash('error', 'Unable to read data from image');
             res.redirect('/codes/upload');
@@ -173,7 +173,7 @@ router.put('/:id', isOwner, (req, res) => {
   if(req.body.title && req.body.description){
     Code.findByIdAndUpdate(req.params.id, {$set: {title: req.body.title, description: req.body.description}})
     .then(code => {
-      req.flash('success', `Succesfully updated code`);
+      req.flash('success', `Successfully updated code`);
       res.redirect(`/codes/${req.params.id}`);
     })
     .catch(err => {
@@ -218,7 +218,7 @@ router.put('/:id/favorite', isOwner, (req, res) => {
 router.delete('/:id', isOwner, (req, res) => {
   Code.findByIdAndRemove(req.params.id)
     .then(code => {
-      req.flash('success', 'Code was succesfully deleted');
+      req.flash('success', 'Code was successfully deleted');
       res.redirect('/codes');
     })
     .catch(err => {

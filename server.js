@@ -27,7 +27,7 @@ app.use(methodOverride("_method"));
 app.use(flash());
 
 app.use(require("express-session")({
-  secret: "This can be whatever!",
+  secret: SECRET,
   resave: false,
   saveUninitialized: false
 }));

@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const User = require('../models/user');
+const {isLoggedIn, validateCode, isOwner} = require('../middleware');
 
 //GET signup form
 router.get('/register', (req, res) => {
@@ -39,6 +40,12 @@ router.post('/login', passport.authenticate("local",
   failureRedirect: '/users/login',
   failureFlash: true
 }), (req,res) => {});
+
+//GET current user (testing)
+router.get('/current', isLoggedIn, (req, res) => {
+  const userID = req.user._id;
+  res.json({userID});
+})
 
 //GET logout
 router.get('/logout', (req, res) => {
