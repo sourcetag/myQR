@@ -50,7 +50,7 @@ router.get('/current', isLoggedIn, (req, res) => {
 //GET logout
 router.get('/logout', (req, res) => {
     req.logout();
-    req.flash("success", "Succesfully logged out!");
+    req.flash("success", "Successfully logged out!");
     res.redirect("/users/login");
 })
 

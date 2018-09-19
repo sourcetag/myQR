@@ -50,7 +50,7 @@ function tearDownDb() {
   return mongoose.connection.dropDatabase();
 }
 
-describe('myQR API resource', function() {
+describe('myQR codes API resource', function() {
   before(function(){
     return runServer(TEST_DATABASE_URL);
   });
