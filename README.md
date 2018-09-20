@@ -20,4 +20,3 @@ Screenshots
 ![alt text](public/assets/screenshots/codepage.png)
 ![alt text](public/assets/screenshots/codesearch.png)
 ![alt text](public/assets/screenshots/codefav.png)
-![alt text](public/assets/screenshots/codesmobile.ong.png)
