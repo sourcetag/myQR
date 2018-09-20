@@ -20,3 +20,34 @@ Screenshots
 ![alt text](public/assets/screenshots/codepage.png)
 ![alt text](public/assets/screenshots/codesearch.png)
 ![alt text](public/assets/screenshots/codefav.png)
+
+# Technologies
+
+## Frontend
+  * HTML
+  * CSS3
+  * Javascript
+  * jquery
+
+## Backend
+  * Node.js
+  * Express.js
+  * Passport
+  * Mongoose
+  * jsqr
+  * qr-image
+  * multer
+  * jpeg-js
+  * pngparse-sync
+
+## Testing
+  * Mocha
+  * Chai
+  * Faker
+  * Cheerio
+  * Travis CI
+
+# Hosted on
+  Heroku
+
+# Future Features
