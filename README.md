@@ -51,3 +51,5 @@ Screenshots
   Heroku
 
 # Future Features
+ * Improved uploading/QR Recognition
+ * Supporting more image types
