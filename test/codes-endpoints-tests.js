@@ -389,3 +389,4 @@ describe('myQR codes API resource', function() {
     });
   });
 });
+ 
