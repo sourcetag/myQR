@@ -5,6 +5,9 @@ A simple, minimalistic QR code manager
 --------------------------------------
 
 ### [Live Link](https://myqr.herokuapp.com/) 
+<strong>Demo The App</strong>
+* Username: demouser
+* Password: demopassword
 --------------------------------------------
 
 Summary
