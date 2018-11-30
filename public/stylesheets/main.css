@@ -297,10 +297,25 @@ body {
 .user-q a {
   text-decoration: none;
   color: #337ab7;
+  cursor: pointer;
 }
 
 .user-q a:visited {
   color: #337ab7;
+}
+
+.demo {
+  text-align: center;
+}
+
+.demo span {
+  text-decoration: none;
+  color: #337ab7;
+  cursor: pointer;
+}
+
+.demo-user-info {
+  display: none;
 }
 
 .new-form h1 {
