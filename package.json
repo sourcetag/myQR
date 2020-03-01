@@ -4,7 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "Andrew Lara",
   "license": "ISC",
